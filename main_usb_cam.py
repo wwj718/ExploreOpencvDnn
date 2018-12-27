@@ -3,13 +3,7 @@ import numpy as np
 import time
 import imutils
 from imutils.video import VideoStream
-import zmq
 
-# zmq socket
-port = 38780
-context = zmq.Context()
-socket = context.socket(zmq.REQ)
-socket.connect ("tcp://localhost:%s" % port)
 
 # Pretrained classes in the model
 classNames = {0: 'background',
@@ -81,8 +75,6 @@ while True:
         class_id = detection[1]
         class_name=id_class_name(class_id,classNames)
         print(class_name)
-        socket.send_json({"class":str(class_name)}) # 设置超时
-        _ = socket.recv_json()
 
     # cv2.imshow("Frame", frame)
     key = cv2.waitKey(1) & 0xFF
