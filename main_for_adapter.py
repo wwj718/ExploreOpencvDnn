@@ -4,6 +4,7 @@ import time
 import imutils
 from imutils.video import VideoStream
 import zmq
+import pathlib
 
 # zmq socket
 port = 38780
@@ -38,8 +39,9 @@ def id_class_name(class_id, classes):
 
 
 # Loading model
-model = cv2.dnn.readNetFromTensorflow('/home/pi/ExploreOpencvDnn/models/frozen_inference_graph.pb',
-                                      '/home/pi/ExploreOpencvDnn/models/ssd_mobilenet_v2_coco_2018_03_29.pbtxt')
+scratch3_adapter_dir = pathlib.Path.home() / "scratch3_adapter"
+model = cv2.dnn.readNetFromTensorflow('{}/ExploreOpencvDnn/models/frozen_inference_graph.pb'.format(scratch3_adapter_dir),
+                                      '{}/ExploreOpencvDnn/models/ssd_mobilenet_v2_coco_2018_03_29.pbtxt'.format(scratch3_adapter_dir))
 
 # initialize the video stream and allow the camera sensor to warm up
 print("[INFO] starting video stream...")
